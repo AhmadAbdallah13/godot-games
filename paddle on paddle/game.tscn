@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgwiscrlnra2t"]
+
+[ext_resource type="PackedScene" uid="uid://dcmcf1cloours" path="res://Scenes/Ball/ball.tscn" id="1_imdhl"]
+[ext_resource type="PackedScene" uid="uid://8obqap51m2th" path="res://Scenes/Paddles/left_paddle.tscn" id="1_tux2p"]
+[ext_resource type="PackedScene" uid="uid://bvllfoqtuyp1m" path="res://Scenes/Paddles/right_paddle.tscn" id="2_djm2d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwhqr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8drtw"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Arena" type="Area2D" parent="."]
+position = Vector2(576, 320)
+scale = Vector2(58.32, 38.28)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
+shape = SubResource("RectangleShape2D_cwhqr")
+debug_color = Color(0.878431, 0.160784, 0.729412, 0.419608)
+
+[node name="LeftPaddle" parent="." instance=ExtResource("1_tux2p")]
+position = Vector2(64, 320)
+
+[node name="RightPaddle" parent="." instance=ExtResource("2_djm2d")]
+position = Vector2(1088, 320)
+
+[node name="PlayArea" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="PlayArea"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+
+[node name="Ball" parent="." instance=ExtResource("1_imdhl")]
+position = Vector2(576, 320)
+collision_layer = 3
+
+[node name="UpperWall" type="StaticBody2D" parent="."]
+position = Vector2(570, -12)
+scale = Vector2(56.76, 1.28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperWall"]
+position = Vector2(0.0704732, 0)
+shape = SubResource("RectangleShape2D_8drtw")
+debug_color = Color(0.207843, 0.639216, 0, 0.419608)
+
+[node name="LowerWall" type="StaticBody2D" parent="."]
+position = Vector2(576, 658)
+scale = Vector2(57.76, 1.28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerWall"]
+shape = SubResource("RectangleShape2D_8drtw")
+debug_color = Color(0.207843, 0.639216, 0, 0.419608)
+
+[connection signal="body_exited" from="Arena" to="Ball" method="_on_arena_body_exited"]

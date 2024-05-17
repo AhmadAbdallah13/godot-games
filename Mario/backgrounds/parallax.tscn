@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdxlqmumvy4k1"]
+
+[ext_resource type="Texture2D" uid="uid://2c2jxp7425kn" path="res://Assets/parallaxes/parallax-00.png" id="1_ir31j"]
+[ext_resource type="Script" path="res://backgrounds/clouds.gd" id="2_fuonc"]
+[ext_resource type="Texture2D" uid="uid://cyg2tyoivdv6k" path="res://Assets/parallaxes/parallax-02.png" id="2_gv53d"]
+[ext_resource type="Texture2D" uid="uid://bpx13bpgcc0l1" path="res://Assets/parallaxes/parallax-01.png" id="2_uqia3"]
+[ext_resource type="Texture2D" uid="uid://bwvpge7jgi404" path="res://Assets/parallaxes/parallax-03.png" id="4_dln8l"]
+[ext_resource type="Texture2D" uid="uid://c8xtgl34suxx1" path="res://Assets/parallaxes/parallax-04.png" id="5_bb0g1"]
+
+[node name="parallax" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1440, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/sky"]
+texture_filter = 1
+texture = ExtResource("1_ir31j")
+centered = false
+
+[node name="clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.4, 0)
+motion_mirroring = Vector2(1440, 0)
+script = ExtResource("2_fuonc")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/clouds"]
+texture_filter = 1
+texture = ExtResource("2_uqia3")
+centered = false
+
+[node name="mountains2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0)
+motion_mirroring = Vector2(1440, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/mountains2"]
+texture_filter = 1
+texture = ExtResource("2_gv53d")
+centered = false
+
+[node name="mountains3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1, 0)
+motion_mirroring = Vector2(1440, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/mountains3"]
+texture_filter = 1
+texture = ExtResource("4_dln8l")
+centered = false
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+layer = 1
+follow_viewport_scale = 0.001
+
+[node name="mountains4" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(2, 0)
+motion_mirroring = Vector2(1440, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/mountains4"]
+texture_filter = 1
+texture = ExtResource("5_bb0g1")
+centered = false

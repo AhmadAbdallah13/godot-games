@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvllfoqtuyp1m"]
+
+[ext_resource type="Script" path="res://Scenes/Paddles/right_paddle.gd" id="1_xrhms"]
+[ext_resource type="Texture2D" uid="uid://b3krx4qrq4qkm" path="res://assets/Default/block_narrow.png" id="2_g2cbh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tvjld"]
+radius = 7.0
+height = 128.0
+
+[node name="RightPaddle" type="CharacterBody2D"]
+script = ExtResource("1_xrhms")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+scale = Vector2(0.48, 1)
+texture = ExtResource("2_g2cbh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_tvjld")

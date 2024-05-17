@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1pgdptn5wo0v"]
+
+[ext_resource type="Script" path="res://Floor/floor.gd" id="1_67iuw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mcppl"]
+
+[node name="Floor" type="StaticBody2D"]
+scale = Vector2(7.71053, 9.2238)
+script = ExtResource("1_67iuw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(0.757314, 0.752399)
+shape = SubResource("RectangleShape2D_mcppl")
