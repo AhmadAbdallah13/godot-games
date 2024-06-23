@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnu3c3bf2b04k"]
+
+[ext_resource type="Texture2D" uid="uid://daufut5jbsxq4" path="res://Assets/sprites/slime_green.png" id="1_4cn5h"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_r1ax2"]
+[ext_resource type="PackedScene" uid="uid://cwsmqw0taf64s" path="res://Scenes/killzone.tscn" id="2_f8slf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih22r"]
+atlas = ExtResource("1_4cn5h")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljqaj"]
+atlas = ExtResource("1_4cn5h")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb6sf"]
+atlas = ExtResource("1_4cn5h")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwbgy"]
+atlas = ExtResource("1_4cn5h")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m6obn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ih22r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljqaj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb6sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwbgy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wj4hv"]
+size = Vector2(12, 11)
+
+[node name="Enemy" type="Node2D"]
+position = Vector2(0, -12)
+script = ExtResource("1_r1ax2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m6obn")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Killzone" parent="." instance=ExtResource("2_f8slf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_wj4hv")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(10, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+rotation = 0.00387899
+target_position = Vector2(-10, 2.08165e-12)
