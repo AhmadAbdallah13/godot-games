@@ -1,0 +1,230 @@
+[gd_scene load_steps=12 format=3 uid="uid://dr010ec07owig"]
+
+[ext_resource type="Theme" uid="uid://cfr5if8n4jaw3" path="res://Assets/basic_theme.tres" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://biolwg5bsptln" path="res://Scripts/main.gd" id="1_jjvhh"]
+[ext_resource type="Script" uid="uid://cou7fn1invipv" path="res://Scripts/playable_area.gd" id="2_bo1nx"]
+[ext_resource type="Texture2D" uid="uid://dj0uenp0etoj5" path="res://Assets/space-background.png" id="4_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://20ix424ye82a" path="res://Assets/stars-background.png" id="5_kry3j"]
+[ext_resource type="Texture2D" uid="uid://y4rd0c2lrgdv" path="res://Assets/obstacle.png" id="6_21xkr"]
+[ext_resource type="AudioStream" uid="uid://cwh3ukpfjfslu" path="res://Assets/point.wav" id="7_6bp64"]
+[ext_resource type="AudioStream" uid="uid://djxm0j6j444uc" path="res://Assets/You lose.wav" id="8_344ge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjvhh"]
+size = Vector2(2063, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
+size = Vector2(2154, 101)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21xkr"]
+size = Vector2(157, 1181)
+
+[node name="Main" type="Node" groups=["main"]]
+script = ExtResource("1_jjvhh")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jjgbg")
+
+[node name="MainMenuContainer" type="MarginContainer" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 1.011
+offset_right = -0.160034
+offset_bottom = 0.119995
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenuContainer"]
+layout_mode = 2
+
+[node name="GameName" type="Label" parent="UI/MainMenuContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_jjgbg")
+theme_override_font_sizes/font_size = 130
+text = "Flappy Rocket"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/MainMenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenuContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="UI/MainMenuContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 60
+text = "Start"
+
+[node name="GameOverContainer" type="MarginContainer" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1080.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOverContainer"]
+layout_mode = 2
+theme = ExtResource("1_jjgbg")
+
+[node name="GameOverHeadline" type="Label" parent="UI/GameOverContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 150
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOverContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.93
+
+[node name="EndScroe" type="Label" parent="UI/GameOverContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 60
+text = "Score: 13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScore" type="Label" parent="UI/GameOverContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 60
+text = "High Score: 13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartGameBtn" type="Button" parent="UI/GameOverContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 60
+text = "Play Again"
+
+[node name="PlayingContainer" type="MarginContainer" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 1.011
+offset_right = -0.160034
+offset_bottom = 0.119995
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PlayingContainer"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="UI/PlayingContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_jjgbg")
+theme_override_font_sizes/font_size = 70
+text = "Score: 0"
+horizontal_alignment = 2
+
+[node name="PlayableArea" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-667, 0)
+script = ExtResource("2_bo1nx")
+
+[node name="PlayableAreaParallaxBG" type="ParallaxBackground" parent="PlayableArea"]
+unique_name_in_owner = true
+
+[node name="Space" type="Parallax2D" parent="PlayableArea/PlayableAreaParallaxBG"]
+repeat_size = Vector2(1920, 0)
+ignore_camera_scroll = true
+
+[node name="Icon2" type="Sprite2D" parent="PlayableArea/PlayableAreaParallaxBG/Space"]
+position = Vector2(961, 539)
+texture = ExtResource("4_jjvhh")
+
+[node name="Stars" type="Parallax2D" parent="PlayableArea/PlayableAreaParallaxBG"]
+repeat_size = Vector2(1920, 0)
+ignore_camera_scroll = true
+
+[node name="Icon2" type="Sprite2D" parent="PlayableArea/PlayableAreaParallaxBG/Stars"]
+position = Vector2(961, 539)
+texture = ExtResource("5_kry3j")
+
+[node name="Borders" type="Node2D" parent="PlayableArea"]
+
+[node name="CeleingBorder" type="StaticBody2D" parent="PlayableArea/Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayableArea/Borders/CeleingBorder"]
+position = Vector2(1600, -36)
+shape = SubResource("RectangleShape2D_jjvhh")
+
+[node name="FloorBorder" type="Area2D" parent="PlayableArea/Borders"]
+unique_name_in_owner = true
+position = Vector2(33, 71)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayableArea/Borders/FloorBorder"]
+position = Vector2(1579, 1003)
+shape = SubResource("RectangleShape2D_kry3j")
+debug_color = Color(0.634825, 0.0401446, 0.167695, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayableArea/Borders/FloorBorder"]
+position = Vector2(1595.81, 1005.03)
+rotation = 1.57079
+scale = Vector2(2.09515, 10.5904)
+texture = ExtResource("6_21xkr")
+
+[node name="ScreenBorderArea2D" type="Area2D" parent="PlayableArea/Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayableArea/Borders/ScreenBorderArea2D"]
+position = Vector2(307, 521.5)
+shape = SubResource("RectangleShape2D_21xkr")
+debug_color = Color(0.851563, 0.000854802, 0.896275, 0.42)
+
+[node name="ObstaclesSpawnLocation" type="Marker2D" parent="PlayableArea"]
+unique_name_in_owner = true
+position = Vector2(2779, 0)
+
+[node name="ObstaclesContainer" type="Node2D" parent="PlayableArea"]
+unique_name_in_owner = true
+
+[node name="PlayerSpawnLocation" type="Marker2D" parent="PlayableArea"]
+position = Vector2(889, 558)
+
+[node name="ObstacleCreationTimer" type="Timer" parent="PlayableArea"]
+wait_time = 2.0
+autostart = true
+
+[node name="PointSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6bp64")
+
+[node name="YouLoseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_344ge")
+
+[connection signal="pressed" from="UI/MainMenuContainer/VBoxContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="UI/GameOverContainer/VBoxContainer/VBoxContainer/RestartGameBtn" to="." method="_on_restart_game_btn_pressed"]
+[connection signal="body_entered" from="PlayableArea/Borders/FloorBorder" to="PlayableArea" method="_on_floor_border_body_entered"]
+[connection signal="body_entered" from="PlayableArea/Borders/ScreenBorderArea2D" to="PlayableArea" method="_on_screen_border_area_2d_body_entered"]
+[connection signal="timeout" from="PlayableArea/ObstacleCreationTimer" to="PlayableArea" method="_on_obstacle_creation_timer_timeout"]
